@@ -20,8 +20,7 @@ func main() {
 		RepoService: &github.RepoService{},
 	}
 
-	router.Get("/", web.Handler{Env: env, Handle: web.Index})
-	router.Get("/repos", web.Handler{Env: env, Handle: web.Repos})
+	router.Get("/", web.Handler{Env: env, Handle: web.Repos})
 
 	log.Fatal(http.ListenAndServe(":8000", router))
 }
