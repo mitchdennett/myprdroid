@@ -1,4 +1,4 @@
-package handler
+package web
 
 import (
 	"github.com/julienschmidt/httprouter"
@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 )
 
-func Index(w http.ResponseWriter, r *http.Request, ps httprouter.Params) error {
+func Index(env *Env, w http.ResponseWriter, r *http.Request, ps httprouter.Params) error {
 	lp := filepath.Join("templates", "base.html")
 	fp := filepath.Join("templates", "index.html")
 

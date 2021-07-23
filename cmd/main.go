@@ -1,16 +1,27 @@
 package main
 
 import (
-	"github.com/mitchdennett/myprdroid/handler"
+	"github.com/joho/godotenv"
+	"github.com/mitchdennett/myprdroid/github"
+	"github.com/mitchdennett/myprdroid/web"
 	"log"
 	"net/http"
 )
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
 
-	router := handler.NewRouter()
+	router := web.NewRouter()
 
-	router.Get("/", handler.Handler{Handle: handler.Index})
+	env := &web.Env{
+		RepoService: &github.RepoService{},
+	}
+
+	router.Get("/", web.Handler{Env: env, Handle: web.Index})
+	router.Get("/repos", web.Handler{Env: env, Handle: web.Repos})
 
 	log.Fatal(http.ListenAndServe(":8000", router))
 }

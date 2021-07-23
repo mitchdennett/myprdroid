@@ -1,0 +1,9 @@
+{{define "title"}}
+List Repos
+{{end}}
+{{define "body"}}
+    Repos
+    {{ range .Repos }}
+        <div>{{ .Name }}</div>
+    {{end}}
+{{end}}
